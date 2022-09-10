@@ -1,6 +1,6 @@
 # Miguel's dotfiles
 
-![Screenshot of my shell prompt]()
+![Screenshot of my shell prompt](assets/img/dotfiles.png)
 
 All my dotfiles in a single place
 
