@@ -22,7 +22,7 @@ if [ "$1" == "--force" -o "$1" == "-f" -o "$1" == "-y" ]; then
 	setupDotfiles;
 else
   while true; do
-    read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+    read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " yn;
     case $yn in
       [Yy]* )
         setupDotfiles;
