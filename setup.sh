@@ -8,14 +8,14 @@
 git pull origin main;
 
 function setupDotfiles() {
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude ".osx" \
-		--exclude "setup.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
-	source ~/.bash_profile;
+  rsync --exclude ".git/" \
+    --exclude ".DS_Store" \
+    --exclude ".osx" \
+    --exclude "setup.sh" \
+    --exclude "README.md" \
+    --exclude "LICENSE.md" \
+    -avh --no-perms . ~;
+  source ~/.bash_profile;
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" -o "$1" == "-y" ]; then
