@@ -11,6 +11,8 @@ All my dotfiles in a single place
 You can clone the repository wherever you want. (I like to keep it in `~/Documents/GitHub/dotfiles`, with `~/dotfiles` as a symlink.) The setup script will pull in the latest version and copy the files to your home folder.
 
 ```bash
+sudo apt update -y
+sudo apt install git -y
 git clone https://github.com/kaweees/dotfiles.git && cd dotfiles && source setup.sh
 ```
 
