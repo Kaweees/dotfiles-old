@@ -1,2 +1,2 @@
-`:source ~/.config/nvim/init.vim`
-`:source stdpath('config')/init.vim`
+```:source ~/.config/nvim/init.vim
+:source stdpath('config')/init.vim`
