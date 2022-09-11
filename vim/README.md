@@ -1,0 +1,1 @@
+`:source /root/.config/nvim`
