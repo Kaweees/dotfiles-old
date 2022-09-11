@@ -1,1 +1,1 @@
-`:source /root/.config/nvim`
+`:source /root/.config/nvim.init.vim`
