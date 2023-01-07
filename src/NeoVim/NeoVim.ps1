@@ -10,7 +10,6 @@ function Install-VimPlug {
 }
 
 function Set-Vim-Configuration {
-  New-Item -path "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])\nvim" -name "init.vim" -type "file" -Force;
   $DotfilesInitVimPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "NeoVim" | Join-Path -ChildPath "init.vim";
   $InitVimPath = "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])\nvim\init.vim";
 
