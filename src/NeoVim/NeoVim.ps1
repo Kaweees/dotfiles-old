@@ -14,7 +14,7 @@ function Set-Vim-Configuration {
   $InitVimPath = "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])\nvim\init.vim";
 
   if (-not (Test-Path -Path $InitVimPath)) {
-    Write-Host "Copying initial NeoVim configuration file: " -ForegroundColor "Green";
+    Write-Host "Copying initial NeoVim configuration file:" -ForegroundColor "Green";
     Copy-Item $DotfilesInitVimPath -Destination $InitVimPath;
   }
 
