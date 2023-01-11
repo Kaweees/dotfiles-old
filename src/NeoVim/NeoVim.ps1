@@ -12,12 +12,10 @@ function Install-VimPlug {
 function Set-Vim-Configuration {
   $DotfilesInitVimPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "NeoVim" | Join-Path -ChildPath "init.vim";
   $InitVimPath = "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])\nvim\init.vim";
-
   if (-not (Test-Path -Path $InitVimPath)) {
     Write-Host "Copying initial NeoVim configuration file:" -ForegroundColor "Green";
     Copy-Item $DotfilesInitVimPath -Destination $InitVimPath;
   }
-
   Write-Host "Installing NeoVim plugins:" -ForegroundColor "Green";
   nvim --headless +PlugInstall +qall;
   Write-Host "NeoVim was successfully configured." -ForegroundColor "Green";
