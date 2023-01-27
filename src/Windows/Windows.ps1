@@ -126,7 +126,34 @@ function Rename-PC {
     Write-Host "PC renamed, restart it to see the changes." -ForegroundColor "Green";
   }
   else {
-    Write-Host "The PC name is" $Config.ComputerName "so it is not necessary to rename it." -ForegroundColor "Green";
+    Write-Host "The PC name is already" $Config.ComputerName "so it is not necessary to rename it." -ForegroundColor "Green";
+  }
+}
+
+function Set-Wallpaper {
+  param (
+		[Parameter(Mandatory=$TRUE, ParameterSetName="Image")]
+    [string]$Image,
+    [Parameter(Mandatory=$FALSE, ParameterSetName="Style")]
+    [ValidateSet("Fill", "Fit", "Stretch", "Tile", "Center", "Span")]
+    [string]$Style
+  )
+  Write-Host "Setting wallpaper:" -ForegroundColor "Green";
+  $WallpaperStyle = Switch ($Style) {
+    "Fill" { 10 }
+    "Fit" { 6 }
+    "Stretch" { 2 }
+    "Tile" { 0 }
+    "Center" { 0 }
+    "Span" { 22 }
+  }
+  if ($Style -eq "Tile") {
+    New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -PropertyType String -Value $WallpaperStyle -Force
+    New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name TileWallpaper -PropertyType String -Value 1 -Force
+  }
+  else {
+    New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -PropertyType String -Value $WallpaperStyle -Force
+    New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name TileWallpaper -PropertyType String -Value 0 -Force
   }
 }
 
