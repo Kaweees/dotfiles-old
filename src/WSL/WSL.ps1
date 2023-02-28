@@ -1,8 +1,16 @@
 function Install-WSL {
-  choco install -y "wsl2" --params "/Version:2 /Retry:true";
-  choco install -y "wsl-WSL-2004" --params "/InstallRoot:true" --execution-timeout 3600;
+  wsl --install Debian
   wsl --set-default-version 2
   wsl --update
+  wsl --shutdown
+  wsl echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf >/dev/null
+  wsl sudo apt update && sudo apt upgrade -y
+  wsl sudo apt install gedit -y
+  wsl sudo apt install gimp -y
+  wsl sudo apt install nautilus -y
+  wsl sudo apt install vlc -y
+  wsl sudo apt install x11-apps -y
+  wsl sudo apt install x11-xserver-utils -y
 }
 
 function Update-WSL-Packages-Repository {
@@ -233,9 +241,10 @@ function Set-Zsh-As-Default-In-WSL {
   # Change just for a user: sudo chsh -s $WslZshPath $USER_NAME;
 }
 
+
+Install-WSL;
 Update-WSL-Packages-Repository;
 Update-WSL-Packages;
-
 Install-WSL-Package -PackageName "curl";
 Install-WSL-Package -PackageName "neofetch";
 Install-WSL-Package -PackageName "git";
