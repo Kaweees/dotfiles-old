@@ -46,7 +46,7 @@ However, you can set up SSH key-based authentication so that you do not have to 
 To set up SSH key-based authentication, follow the steps below.
 
 1. Generate a new ssh key (we will generate an RSA SSH key pair with a key size of 4096 bits)
-    > Note: Do not change the default name or location of the key. Using a passphrase is optional but not recommended.
+    > **Note** Do not change the default name or location of the key. Using a passphrase is optional but not recommended.
     ```sh
     # Generate a new ssh key
     ssh-keygen -t rsa -b 4096
@@ -84,7 +84,7 @@ Since SSH key-based authentication is more convenient and more secure than passw
 
 To do this, we will edit the server's SSH configuration file. This file is located at `/etc/ssh/sshd_config`.
 
-> Note: Password-based authentication and challenge-response authentication will be disabled. If you do not have password-based authentication [already configured](#setting-up-ssh-key-based-authentication), you will not be able to connect to the server.
+> **Warning** Password-based authentication and challenge-response authentication will be disabled. If you do not have password-based authentication [already configured](#setting-up-ssh-key-based-authentication), you will not be able to connect to the server.
 
 ## Method 1 - Configuration via ssh-copy-id
 
@@ -101,9 +101,9 @@ exit
 
 ## Method 2 - Manual Configuration
 
-To manually configure the server to only use SSH key-based authentication, follow the steps below. 
+To manually configure the server to only use SSH key-based authentication, run the following commands. 
 
-> Note: the location of the SSH configuration file is assumed to be located at `/etc/ssh/sshd_config`. If this is not the case, you will need to modify the commands below to reflect the location of the SSH configuration file. You can find the location of the SSH configuration file by executing a script I wrote found in my [dotfiles's](https://github.com/Kaweees/dotfiles) `/scripts` folder 
+> **Warning** the location of the SSH configuration file is assumed to be located at `/etc/ssh/sshd_config`. If this is not the case, you will need to modify the commands below to reflect the location of the SSH configuration file. You can find the location of the SSH configuration file by executing a script I wrote found in my [dotfiles's](https://github.com/Kaweees/dotfiles) `/scripts` folder 
 > ```sh
 > # make find_sshd_config executable
 > chmod +x find_sshd_config.sh
