@@ -1,19 +1,35 @@
-# Miscellaneous Developer Environment Setup Notes
+# Miscellaneous Developer Environment Setup Compendium
 
 This document describes how I set up aspects of my developer environment that are not covered by my [dotfiles](https://github.com/Kaweees/dotfiles) or my [Ansible Playbook](https://github.com/Kaweees/ansible). I have decided to include the following sections because I have found that these are difficult to automate, these should be done manually, and/or I've included as a reference for myself. You may find that you do not need all of them for your projects, although I recommend having them set up as they always come in handy.
 
 ## Table of Contents
-
-- [Secure Shell (ssh)](#secure-shell-ssh)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [SSH Key-Based Authentication Setup](#ssh-key-based-authentication-setup)
-  - [Enabling SSH Key-Based Authentication Only](#enabling-ssh-key-based-authentication-only)
-    - [Method 1 - Configuration via ssh-copy-id](#method-1---configuration-via-ssh-copy-id)
-    - [Method 2 - Manual Configuration](#method-2---manual-configuration)
-- [Git](#git)
-
-
+- [Security](#security)
+  - [Secure Shell (ssh)](#secure-shell-ssh)
+- [Dotfiles](#dotfiles)
+  - [GNU Stow](#gnu-stow)
+- [Navigation](#navigation)
+  - [Window Management](#window-management)
+    - [i3](#i3)
+    - [Polybar](#polybar)
+    - [Xrandr](#xrandr)
+    - [Polybar](#polybar)
+  - [Command Line Navigation](#command-line-navigation)
+    - [Semantical Differences](#semantical-differences)
+    - [Shell Management](#shell-management)
+      - [Zsh](#zsh)
+    - [Terminal Management](#terminal-management)
+      - [Xterm](#xterm)
+      - [Tmux](#tmux)
+      - [Tmuxinator](#tmuxinator)
+      - [Tmuxp](#tmuxp)
+      - [Tmuxinator]()
+  - [File Management](#file-management)
+    - [Ranger](#ranger)
+    - [Vifm](#vifm)
+- [Version Control](#version-control)
+  - [Git](#git)
+- [Text Editors](#text-editors)
+  - [Neovim](#neovim)
 
 ## Secure Shell (ssh)
 
@@ -86,7 +102,7 @@ To do this, we will edit the server's SSH configuration file. This file is locat
 
 > **Warning** Password-based authentication and challenge-response authentication will be disabled. If you do not have password-based authentication [already configured](#setting-up-ssh-key-based-authentication), you will not be able to connect to the server.
 
-## Method 1 - Configuration via ssh-copy-id
+#### Method 1 - Configuration via ssh-copy-id
 
 To configure the server to only use SSH key-based authentication via ssh-copy-id, follow the steps below.
 
@@ -99,7 +115,7 @@ ssh <username>@<server_ip>
 exit
 ```
 
-## Method 2 - Manual Configuration
+#### Method 2 - Manual Configuration
 
 To manually configure the server to only use SSH key-based authentication, run the following commands. 
 
@@ -133,3 +149,7 @@ echo "SSH configuration completed. Disconnecting from server."
 # exit server
 exit # exit server
 ```
+
+### Securely Storing SSH Keys and Auth Tokens on the Internet
+
+Storing your SSH keys and authentication tokens on the internet might seem like a bad idea, but if they are properly secured, storing them in a public GitHub repository can be a convenient and secure way to sync your SSH keys and authentication tokens across multiple machines. Luckily for us, ansible-vault's encryption feature ensures that sensitive information remains protected even in a public repository.
