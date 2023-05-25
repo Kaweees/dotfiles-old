@@ -1,4 +1,6 @@
-# Miguel's Dotfiles
+<div align="center">
+  <h1><em>~Miguel's Dotfiles</em></h1>
+</div>
 
 ![Screenshot of my desktop]()
 
