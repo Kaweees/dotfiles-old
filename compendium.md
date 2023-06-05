@@ -9,10 +9,11 @@ This document describes how I set up aspects of my developer environment that ar
   - [GNU Stow](#gnu-stow)
 - [Navigation](#navigation)
   - [Window Management](#window-management)
-    - [i3](#i3)
+    - [Xorg](#xorg)
+    - [dwm](#dwm)
     - [Polybar](#polybar)
     - [Xrandr](#xrandr)
-    - [Polybar](#polybar)
+      - [autorandr](#autorandr)
   - [Command Line Navigation](#command-line-navigation)
     - [Semantical Differences](#semantical-differences)
     - [Shell Management](#shell-management)
@@ -30,6 +31,11 @@ This document describes how I set up aspects of my developer environment that ar
   - [Git](#git)
 - [Text Editors](#text-editors)
   - [Neovim](#neovim)
+- [Browsers](#browsers)
+  - [Vivaldi](#vivaldi)
+- [Media](#media)
+  - [Vlc](#vlc)
+  - [Pulseaudio](#pulseaudio)
 
 ## Secure Shell (ssh)
 
@@ -117,7 +123,7 @@ exit
 
 #### Method 2 - Manual Configuration
 
-To manually configure the server to only use SSH key-based authentication, run the following commands. 
+To manually configure the server to only use SSH key-based authentication, run the following commands:
 
 > **Warning** the location of the SSH configuration file is assumed to be located at `/etc/ssh/sshd_config`. If this is not the case, you will need to modify the commands below to reflect the location of the SSH configuration file. You can find the location of the SSH configuration file by executing a script I wrote found in my [dotfiles's](https://github.com/Kaweees/dotfiles) `/scripts` folder 
 > ```sh
@@ -152,4 +158,26 @@ exit # exit server
 
 ### Securely Storing SSH Keys and Auth Tokens on the Internet
 
-Storing your SSH keys and authentication tokens on the internet might seem like a bad idea, but if they are properly secured, storing them in a public GitHub repository can be a convenient and secure way to sync your SSH keys and authentication tokens across multiple machines. Luckily for us, ansible-vault's encryption feature ensures that sensitive information remains protected even in a public repository.
+Storing your SSH keys and authentication tokens on the internet might seem like a bad idea, but if they are properly secured, storing them in a public GitHub repository can be a convenient and secure way to sync your SSH keys and authentication tokens across multiple machines. Luckily for us, ansible-vault's encryption engine is based on the AES-256 cipher, which is a symmetric cipher that is quantum resistant. This ensures that sensitive information remains protected, even in a public repository.
+
+#### Encrypting Files Via Ansible-Vault
+
+To encrypt files, including your SSH keys and authentication tokens on the internet, run the following command:
+
+```sh
+# Encrypt files using ansible-vault
+ansible-vault encrypt <path_to_file>
+```
+
+Enter an encryption key when prompted.
+
+#### Decrypting Files Via Ansible-Vault
+
+To decrypt files, run the following command:
+
+```sh
+# Decrypt files using ansible-vault
+ansible-vault decrypt <path_to_file>
+```
+
+Enter the encryption key when prompted.
