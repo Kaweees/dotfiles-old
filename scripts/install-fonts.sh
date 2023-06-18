@@ -3,7 +3,7 @@
 the_fonts_dir=$(pwd)
 echo "the_fonts_dir: $the_fonts_dir"
 
-find_command="find \"$the_fonts_dir\" \( -name '*.[o,t]tf' -or -name '*.pcf.gz' \) -type f -print0"
+find_command="find \"$the_fonts_dir\" \( -name '*.[o,t]tf' -or -name '*.[o,t]tc' -or -name '*.pcf.gz' \) -type f -print0"
 
 if [[ `uname` == 'Darwin' ]]; then
   # Works on MacOS

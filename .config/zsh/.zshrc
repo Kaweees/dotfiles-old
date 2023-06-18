@@ -100,4 +100,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias install-fonts='~/bin/install-fonts.sh' # install fonts
 alias rars='java -jar ~/opt/riscv/rars/rars.jar &' # RARS simulator
+alias vivado='tools/Xilinx/Vivado/2022.2/bin/vivado &' # Vivado 2020.2
+alias gcc-357='gcc -ansi -Wall -pedantic -Werror -o ${1:r} $1' # GCC for CSC 357
+alias mavillaf='ssh mavillaf@unix1.csc.calpoly.edu'
+
+path+=('$JAVA_HOME/bin') # append java to path
+path+=('$HOME/.cargo/bin') # append cargo to path
+path+=('$HOME/.local/bin') # append local bin to path
+
+# export to sub-processes (make it inherited by child processes)
+export PATH
