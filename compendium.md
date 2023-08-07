@@ -70,6 +70,8 @@ To set up SSH key-based authentication, follow the steps below.
 1. Generate a new ssh key (we will generate an RSA SSH key pair with a key size of 4096 bits)
     > **Note** Do not change the default name or location of the key. Using a passphrase is optional but not recommended.
     ```sh
+    # If the host was previously used for ssh and the host key has changed, remove the old host key
+    ssh-keygen -f "~/.ssh/known_hosts" -R "<server_ip>"
     # Generate a new ssh key
     ssh-keygen -t rsa -b 4096
     ```
