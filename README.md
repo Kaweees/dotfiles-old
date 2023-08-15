@@ -31,3 +31,13 @@ Alternatively, to update while also avoiding the confirmation prompt:
 ```bash
 set -- -f; source setup.sh
 ```
+
+<!-- PROJECT FILE STRUCTURE -->
+## Project Structure
+
+```
+. dotfiles/
+├── .config -> $XDG_CONFIG_HOME    - configuration files for various services
+├── scripts -> ~/.local/bin        - scripts to run
+└── README.md                      - you are here
+```
