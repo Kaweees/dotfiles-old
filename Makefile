@@ -1,7 +1,7 @@
 LN := ln -svf
 MKDIR := mkdir -p
 OS := $(shell uname)
-CONFIG := $(PWD)/config
+USERNAME := $(shell whoami)
 XDG_CONFIG := $(HOME)/.config
 XDG_LOCAL := $(HOME)/.local
 
@@ -13,8 +13,8 @@ STOW_DIR := ~/dotfiles
 PACKAGES := package1 package2 package3
 
 # Additional directories
-CONFIG := .config
-SCRIPTS := scripts
+CONFIG := $(PWD)/.config
+SCRIPTS := $(PWD)/scripts
 
 # Default target: stow all packages, .config, and scripts
 all: $(PACKAGES) $(CONFIG) $(SCRIPTS)
@@ -28,12 +28,17 @@ uninstall-%:
 	$(STOW) -D $*
 
 # Target to stow .config
-$(CONFIG):
-	$(STOW) -R -t $(HOME) $@
+$(CONFIG): zsh git neovim
 
-# Target to stow scripts
-$(SCRIPTS):
-	$(STOW) -R -t $(HOME)/.local/bin $@
+zsh:
+	$(STOW) --restow --dir $(CONFIG)/zsh --target $(HOME)
+
+git:
+	$(STOW) --restow --dir $(CONFIG)/git --target $(XDG_CONFIG)
+	$(STOW) --restow --dir $(CONFIG)/git --target $(XDG_CONFIG)
+
+neovim:
+	$(STOW) --restow --dir $(CONFIG)/nvim --target $(XDG_CONFIG)
 
 # Target to clean up (unstow) all packages, .config, and scripts
 clean:
@@ -55,4 +60,4 @@ help:
 	@echo "  uninstall-.config Unstow the .config directory"
 	@echo "  uninstall-scripts Unstow the scripts directory"
 
-.PHONY: all clean $(PACKAGES) $(CONFIG) $(SCRIPTS) help
+.PHONY: all clean $(PACKAGES) $(CONFIG) $(SCRIPTS) help zsh git neovim
