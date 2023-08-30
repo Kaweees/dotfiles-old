@@ -14,10 +14,10 @@ PACKAGES := package1 package2 package3
 
 # Additional directories
 CONFIG := $(PWD)/.config
-SCRIPTS := $(PWD)/scripts
+LOCAL := $(PWD)/.local
 
-# Default target: stow all packages, .config, and scripts
-all: $(PACKAGES) $(CONFIG) $(SCRIPTS)
+# Default target: stow all packages, .config, and .local
+all: $(PACKAGES) $(CONFIG) $(LOCAL)
 
 # Target to stow a specific package
 $(PACKAGES):
@@ -40,9 +40,13 @@ git:
 neovim:
 	$(STOW) --restow --dir $(CONFIG)/nvim --target $(XDG_CONFIG)
 
-# Target to clean up (unstow) all packages, .config, and scripts
+# Target to stow .local
+$(LOCAL):
+	$(STOW) --restow --dir $(LOCAL) --target $(XDG_LOCAL)
+
+# Target to clean up (unstow) all packages, .config, and LOCAL
 clean:
-	@for pkg in $(PACKAGES) $(CONFIG) $(SCRIPTS); do \
+	@for pkg in $(PACKAGES) $(CONFIG) $(LOCAL); do \
 		$(STOW) -D $$pkg; \
 	done
 
@@ -51,13 +55,13 @@ help:
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "Targets:"
-	@echo "  all              Stow all packages, .config, and scripts"
-	@echo "  clean            Unstow all packages, .config, and scripts"
+	@echo "  all              Stow all packages, .config, and .local"
+	@echo "  clean            Unstow all packages, .config, and .local"
 	@echo "  <package>        Stow a specific package (e.g., package1)"
 	@echo "  uninstall-<package> Unstow a specific package (e.g., uninstall-package1)"
 	@echo "  .config          Stow the .config directory"
-	@echo "  scripts          Stow the scripts directory"
+	@echo "  .local           Stow the .local directory"
 	@echo "  uninstall-.config Unstow the .config directory"
-	@echo "  uninstall-scripts Unstow the scripts directory"
+	@echo "  uninstall-.local Unstow the .local directory"
 
-.PHONY: all clean $(PACKAGES) $(CONFIG) $(SCRIPTS) help zsh git neovim
+.PHONY: all clean $(PACKAGES) $(CONFIG) $(LOCAL) help zsh git neovim

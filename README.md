@@ -37,7 +37,9 @@ set -- -f; source setup.sh
 
 ```
 . dotfiles/
-├── .config -> $XDG_CONFIG_HOME    - configuration files for various services
-├── scripts -> ~/.local/bin        - scripts to run
+├── .config -> ~/.config           - configuration files for various services
+├── .local -> ~/.local             - local data files for various services
+│   └── bin                        - binaries used by the user 
+│       └── scripts                - scripts available to the user at runtime
 └── README.md                      - you are here
 ```
