@@ -28,17 +28,19 @@ uninstall-%:
 	$(STOW) -D $*
 
 # Target to stow .config
-$(CONFIG): zsh git neovim
+$(CONFIG): dwm git neovim zsh
 
-zsh:
-	$(STOW) --restow --dir $(CONFIG)/zsh --target $(HOME)
+dwm:
+	$(STOW) --restow --dir $(CONFIG)/dwm --target $(HOME)/dwm
 
 git:
-	$(STOW) --restow --dir $(CONFIG)/git --target $(XDG_CONFIG)
-	$(STOW) --restow --dir $(CONFIG)/git --target $(XDG_CONFIG)
+	$(STOW) --restow --dir $(CONFIG)/git --target $(HOME)
 
 neovim:
 	$(STOW) --restow --dir $(CONFIG)/nvim --target $(XDG_CONFIG)
+
+zsh:
+	$(STOW) --restow --dir $(CONFIG)/zsh --target $(HOME)
 
 # Target to stow .local
 $(LOCAL):
@@ -64,4 +66,4 @@ help:
 	@echo "  uninstall-.config Unstow the .config directory"
 	@echo "  uninstall-.local Unstow the .local directory"
 
-.PHONY: all clean $(PACKAGES) $(CONFIG) $(LOCAL) help zsh git neovim
+.PHONY: all clean $(PACKAGES) $(CONFIG) $(LOCAL) help dwm git neovim zsh
