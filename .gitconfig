@@ -1,0 +1,192 @@
+# Content for global ~/.gitconfig file.
+
+[user]
+	name = "Michael Currin"
+
+	# email = "..."
+
+[core]
+	editor = "nano"
+
+	# Global ignore file. Must be double quotes here to evaluate.
+	excludesfile = "~/.gitignore"
+	
+	# Line endings. Must be double quotes here to avoid error.
+	autocrlf = "input"
+[alias]
+	# NOTES
+	# You must use double quotes if using spaces, otherwise you'll get command not found.
+	# You don't need to reload your terminal - git aliases are evaluated fresh each time.
+
+	# Short output with branch info.
+	st = "status -s -b"
+
+	c = "commit"
+
+	# --all
+	# --verbose
+	br = "branch -a -v"
+
+	co = "checkout"
+	cb = "checkout -b"
+
+	# Normally `git diff` only shows unstaged changes. This will show only staged (i.e. cached)
+	# changes and uses HEAD as the default <commit> value.
+	dc = "diff --cached"
+	# Show diff of staged AND unstaged changes, relative to previous commit.
+	dh = "diff HEAD"
+	# From ZSH gds.
+	ds = "diff --staged"
+
+	###
+
+	lp = "log --pretty='%h %ci %cN %s'"
+
+	# --patch:
+	#    Generate patch i.e. diff for each commit.
+	lg = "log -p"
+
+	# --graph:
+	#     Draw a text-based graphical representation of the commit history on
+	#     the left hand side of the output.
+	# --decorate:
+	#     Print out the ref names of any commits that are shown. Defaults to
+	#     short optionm such that the name prefixes refs/heads/, refs/tags/ and
+	#     refs/remotes/ will not be printed.
+	lol = "log --graph --decorate --oneline"
+	# --all:
+	#     Pretend as if all the refs in refs/ are listed on the command line as <commit>.
+	lola = "lol --all"
+
+	# Commits for tags and feature branches only. Including date. Show on one line with colors.
+	# Note: Single quotes were needed to avoid errors of unknown revision.
+	lolt = "log --simplify-by-decoration --pretty='%C(yellow)%h %C(bold blue)%ci%C(green)%d %Creset%s'"
+
+	# Copied from my Dell:
+	# Short hash, relative date and message.
+	logd = "log --pretty='%C(yellow)%h %C(cyan)%ar %Creset%s'"
+	# Short hash, date, name and message.
+	logn = "log --pretty='%C(yellow)%h %Creset%C(cyan)%ai %C(green)%an %C(reset)%s'"
+	# Email in place of name.
+	loge = "log --pretty='%C(yellow)%h %Creset%C(cyan)%ai %C(green)%ae %C(reset)%s'"
+
+	###
+
+	# Show information about files in the index and the working tree
+	ls = "ls-files"
+	# Show files ignored by git.
+	ign = "ls-files -o -i --exclude-standard"
+
+	# Cleanup deleted remote branches.
+	# Removes REMOTE branch refs which no longer exist on origin. Does not affect local branches.
+	# It's best to do `git fetch` before this to ensure your origin is up to date.
+	# Don't confuse with `git prune` - "Prune all unreachable objects from the object database."
+	pr = "remote prune origin"
+
+	# Return git project root.
+	root = "rev-parse --show-toplevel"
+	# Go to root.
+	# Based on grt for ZSH but added as a git alias.
+	grt="! cd $(git rev-parse --show-toplevel)"
+
+	# Allow git commands from root.
+	# Git runs shell commands from root, this means you can do `git exec make` from anywhere for example.
+	exec = "! exec "
+
+	# Show all git aliases alphabetically.
+	# First part outputs lines as 'alias.KEY VALUE' and the second part cleans it and sets it as
+	# "KEY = VALUE".
+	alias = """! git config --get-regexp ^alias\\. \
+		| sed -e s/^alias\\.// -e s/\\ /\\ =\\ / \
+		| sort \
+	"""
+
+	sync = "! git pull --rebase && git push"
+	sync-tags = "! git fetch --tags && git push --tags --no-verify"
+	sync-stash = "! git stash -u && git sync && git stash pop"
+	sync-all = """! git pull --rebase \
+		&& git push --progress \
+		&& git push --tags --no-verify \
+	"""
+
+	# View tags sorted by version number - newest first. Based on ZSH gtv.
+	tags = "! git tag | sort -V -r"
+
+	# Show most recent tag. Based on ZSH gct
+	tag-latest = "! git describe --tags $(git rev-list --tags --max-count=1)"
+	co-tag-latest = "! git checkout $(git tag-latest)"
+	
+	# Cloning helpers - first argument is repo name.
+	# Note this runs as sh so can't use `[[`.
+	# Outer double quotes is necessary.
+	# Adding cd won't persist. But `code` would.
+	clone-h = """! [ $# -ne 1 ] \
+		&& echo 'Args: REPO_NAME'  \
+		|| git clone https://github.com/MichaelCurrin/$1.git \
+	"""
+	clone-s = """! [ $# -ne 1 ]\
+		&&  echo 'Args: REPO_NAME'\
+		||  git clone git@github.com:MichaelCurrin/$1.git \
+	"""
+	
+	clone-https = """! [ $# -ne 1 ]  \
+		&& echo 'Args: USERNAME/REPO_NAME (one arg, including forward-slash)' \
+		|| git clone https://github.com/$1.git # \
+	"""
+	clone-ssh = """! [ $# -ne 1 ] \
+		&& echo 'Args: USERNAME/REPO_NAME (one arg, including forward-slash)' \
+		|| git clone git@github.com:$1.git # \
+	"""
+	
+	# Shallow clone such as to test a public repo I found. Use full HTTPS or SSH URL.
+	clone-shallow = "clone --depth 1 --single-branch"
+
+	# Undo latest commit - softly.
+	# The changes from the current commit will appear in the working tree so you can commit them
+	# again if you like. The use of `--soft` is implied.
+	back = "git reset HEAD~"
+
+	# Undo latest commit - aggressively. 
+	# The changes from the current commit will be DROPPED, so you can start over. To avoid resetting
+	# unstaged stages, this will abort if the working tree is not clean.
+	undo = """! [ -z $(git status --porcelain) ] \
+		&& git reset --hard HEAD~ \
+		|| echo 'Unstaged changes!' \
+	"""
+	
+	# Reset and checkout.
+	# A kind of clean step to remove uncommitted changes to tracked/versioned files.
+	#   - For the current directory and below.
+	#   - But will not affect unversioned files - use a clean command for that.
+	# 
+	# See also `gpristine` on ZSH but that also removes ignored files I think so would be dangerous.
+	resetco = """! git reset HEAD \
+		&& git checkout . \
+		&& git status \
+	"""
+
+	### 
+	
+	pushf = "push --force-with-lease"
+		pf = "pushf --no-verify"
+	p = "push --no-verify"
+	pu = "! git push --no-verify -u origin $(git branch --show-current)"
+
+	# View your Conventional Commit log messages with emojis added.
+	# See https://github.com/MichaelCurrin/emoji-resources/blob/main/git-log-emoji.md
+	emoji = """"""
+
+[pull]
+	# New versions of git tell you to set this explicitly. Here is the default behavior. This means
+	# "git pull" does nothing more than that. You can always run "git pull --rebase" when you need to.
+	rebase = false
+
+[fetch]
+	# Deleted local references to remote branches which have been deleted.
+	# This is setup to happen when running fetch/pull, to avoid having to run it
+	# manually as "git remote prune origin".
+	prune = true
+	
+[init]
+	# Set branch for git init. GitHub uses main but git uses master unless you override here.
+	defaultBranch = "main"
