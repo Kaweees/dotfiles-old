@@ -108,45 +108,44 @@ draw_bold_text_with_bright_colors: false
 custom_cursor_colors: true
 
 # Colors
-  # # Tomorrow Night (https://github.com/aarowill/base16-alacritty/blob/master/colors/base16-tomorrow-night.yml)
-  # # Default colors
-  # primary:
-  #   background: '0x1d1f21'
-  #   foreground: '0xc5c8c6'
-  # # Colors the cursor will use if `custom_cursor_colors` is true
-  # cursor:
-  #   text: '0x1d1f21'
-  #   cursor: '0xc5c8c6'
-  # # Normal colors
-  # normal:
-  #   black:   '0x1d1f21'
-  #   red:     '0xcc6666'
-  #   green:   '0xb5bd68'
-  #   yellow:  '0xf0c674'
-  #   blue:    '0x81a2be'
-  #   magenta: '0xb294bb'
-  #   cyan:    '0x8abeb7'
-  #   white:   '0xc5c8c6'
-  # # Bright colors
-  # bright:
-  #   black:   '0x969896'
-  #   red:     '0xde935f'
-  #   green:   '0x282a2e'
-  #   yellow:  '0x373b41'
-  #   blue:    '0xb4b7b4'
-  #   magenta: '0xe0e0e0'
-  #   cyan:    '0xa3685a'
-  #   white:   '0xffffff'
+colors:
+  primary:
+    background: '0x090300'
+    foreground: '0xc5c8c6'
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x090300'
+    cursor: '0xc5c8c6'
+  # Normal colors
+  normal:
+    black:   '0x1d1f21'
+    red:     '0xcc6666'
+    green:   '0xb5bd68'
+    yellow:  '0xf0c674'
+    blue:    '0x81a2be'
+    magenta: '0xb294bb'
+    cyan:    '0x8abeb7'
+    white:   '0xc5c8c6'
+  # Bright colors
+  bright:
+    black:   '0x969896'
+    red:     '0xde935f'
+    green:   '0x282a2e'
+    yellow:  '0x373b41'
+    blue:    '0x807d7c'
+    magenta: '0xd6d5d4'
+    cyan:    '0xcdab53'
+    white:   '0xf7f7f7'
 
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '0xff00ff' }`
-  #
-  # indexed_colors: []
+# Indexed Colors
+#
+# The indexed colors include all colors from 16 to 256.
+# When these are not set, they're filled with sensible defaults.
+#
+# Example:
+#   `- { index: 16, color: '0xff00ff' }`
+#
+# indexed_colors: []
 
 # Visual Bell
 #
@@ -370,7 +369,7 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
+  save_to_clipboard: true
 
 # Mouse bindings
 #
@@ -388,7 +387,9 @@ selection:
 # All available `mods` and `action` values are documented in the key binding
 # section.
 mouse_bindings:
+  - { mouse: Left, action: Copy }
   - { mouse: Middle, action: PasteSelection }
+  - { mouse: Right, action: Paste }
 
 cursor:
   # Cursor style
