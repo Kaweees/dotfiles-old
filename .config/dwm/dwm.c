@@ -1575,10 +1575,11 @@ void attach(Client *c) {
 }
 
 void attachbottom(Client *c) {
-	Client **tc;
-	c->next = NULL;
-	for (tc = &c->mon->clients; *tc; tc = &(*tc)->next);
-	*tc = c;
+  Client **tc;
+  c->next = NULL;
+  for (tc = &c->mon->clients; *tc; tc = &(*tc)->next)
+    ;
+  *tc = c;
 }
 
 /* This inserts a client at the top of the monitor's stacking order.
@@ -4586,29 +4587,31 @@ void resize(Client *c, int x, int y, int w, int h, int interact) {
  */
 void resizeclient(Client *c, int x, int y, int w, int h) {
   XWindowChanges wc;
-	unsigned int n;
-	unsigned int gapoffset;
-	unsigned int gapincr;
-	Client *nbc;
+  unsigned int n;
+  unsigned int gapoffset;
+  unsigned int gapincr;
+  Client *nbc;
   wc.border_width = c->bw;
 
-	/* Get number of clients for the client's monitor */
-	for (n = 0, nbc = nexttiled(c->mon->clients); nbc; nbc = nexttiled(nbc->next), n++);
+  /* Get number of clients for the client's monitor */
+  for (n = 0, nbc = nexttiled(c->mon->clients); nbc;
+       nbc = nexttiled(nbc->next), n++)
+    ;
 
-	/* Do nothing if layout is floating */
-	if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
-		gapincr = gapoffset = 0;
-	} else {
-		/* Remove border and gap if layout is monocle or only one client */
-		if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
-			gapoffset = 0;
-			gapincr = -2 * borderpx;
-			wc.border_width = 0;
-		} else {
-			gapoffset = gappx;
-			gapincr = 2 * gappx;
-		}
-	}
+  /* Do nothing if layout is floating */
+  if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
+    gapincr = gapoffset = 0;
+  } else {
+    /* Remove border and gap if layout is monocle or only one client */
+    if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
+      gapoffset = 0;
+      gapincr = -2 * borderpx;
+      wc.border_width = 0;
+    } else {
+      gapoffset = gappx;
+      gapincr = 2 * gappx;
+    }
+  }
 
   /* There are three things happening here:
    *    - the existing x, y, w and h are stored in oldx, oldy, oldw and oldh
@@ -4621,10 +4624,14 @@ void resizeclient(Client *c, int x, int y, int w, int h) {
    * function, so setting those here is only in relation to the resizeclient
    * call being made in that function.
    */
-	c->oldx = c->x; c->x = wc.x = x + gapoffset;
-	c->oldy = c->y; c->y = wc.y = y + gapoffset;
-	c->oldw = c->w; c->w = wc.width = w - gapincr;
-	c->oldh = c->h; c->h = wc.height = h - gapincr;
+  c->oldx = c->x;
+  c->x = wc.x = x + gapoffset;
+  c->oldy = c->y;
+  c->y = wc.y = y + gapoffset;
+  c->oldw = c->w;
+  c->w = wc.width = w - gapincr;
+  c->oldh = c->h;
+  c->h = wc.height = h - gapincr;
   /* This calls reconfigures the window's size, position and border according to
    * the XWindowChanges structure that have been populated with data above. */
   XConfigureWindow(
@@ -6214,7 +6221,8 @@ void tile(Monitor *m) {
        * client, we subtract the border width from the size 0              -
        * this resize is not the result of the user interacting with the window
        */
-      resize(c, m->wx, m->wy + my, mw - (2*c->bw) + (n > 1 ? gappx : 0), h - (2*c->bw), 0);
+      resize(c, m->wx, m->wy + my, mw - (2 * c->bw) + (n > 1 ? gappx : 0),
+          h - (2 * c->bw), 0);
 
       /* We increment the master y position with the height of the client after
        * the resize so that we know where the next client can be positioned.

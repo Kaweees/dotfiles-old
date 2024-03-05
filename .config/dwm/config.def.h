@@ -33,7 +33,7 @@
 
 /* The border pixel determines the size of the window border. */
 static const unsigned int borderpx = 15; /* border pixel of windows */
-static const unsigned int gappx     = 15;        /* gaps between windows */
+static const unsigned int gappx = 15;    /* gaps between windows */
 /* The snap pixel controls two things:
  *    - how close to the window area border a window must be before it "snaps"
  * (or docks) against that border when moving a floating window using the mouse
