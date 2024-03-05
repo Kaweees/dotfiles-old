@@ -1,0 +1,1 @@
+picom --config /etc/xdg/picom.conf
