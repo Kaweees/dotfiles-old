@@ -175,7 +175,6 @@ bell:
   color: '0xffffff'
   duration: 0
 
-
 # Key bindings
 #
 # Key bindings are specified as a list of objects. Each binding will specify a
@@ -404,7 +403,7 @@ cursor:
   # window is not focused.
   unfocused_hollow: true
 
-# dynamic_title: false
+dynamic_title: false
 
 # Live config reload (changes require restart)
 live_config_reload: true
@@ -414,7 +413,7 @@ debug:
   render_timer: false
 
   # Keep the log file after quitting Alacritty.
-  persistent_logging: false
+  persistent_logging: true
 
   # Log level
   #
@@ -425,7 +424,7 @@ debug:
   #   - INFO
   #   - DEBUG
   #   - TRACE
-  log_level: OFF
+  log_level: DEBUG
 
   # Print all received window events.
   print_events: false
@@ -438,6 +437,6 @@ debug:
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
-  program: /usr/local/bin/zsh
+  program: /usr/bin/zsh
 
-# vim: nospell
+vim: nospell
