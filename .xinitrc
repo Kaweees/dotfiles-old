@@ -24,4 +24,5 @@ fi
 
 # start some nice programs
 xrandr --output eDP-1 --mode 1920x1200
+picom &
 exec dwm
