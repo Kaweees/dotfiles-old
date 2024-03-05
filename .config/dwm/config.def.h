@@ -25,26 +25,23 @@
  * changed.
  */
 
+#define DEFAULT_FONT "Mono Lisa Nerd Font"
+
 /* Settings related to appearance. */
 
 /* The border pixel determines the size of the window border. */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 6;        /* gaps between windows */
 /* The snap pixel controls two things:
  *    - how close to the window area border a window must be before it "snaps" (or docks) against
  *      that border when moving a floating window using the mouse
  *    - how far the mouse needs to move before a tiled window "snaps" out to become floating when
  *      moving or resizing a window using the mouse
  */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int gappx     = 15;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 /* Whether the bar is shown by default on startup or not. */
 static const int showbar            = 1;        /* 0 means no bar */
 /* Whether the bar is shown at the top or at the bottom of the monitor. */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int splitstatus        = 1;        /* 1 for split status items */
-static const char *splitdelim        = ";";       /* Character used for separating status */
 /* This defines the primary font and optionally fallback fonts. If a glyph does not exist for a
  * character (code point) in the primary font then fallback fonts will be checked.
  * If the fallback fonts also do not have that character then system fonts will be checked for the
@@ -75,9 +72,10 @@ static const char *splitdelim        = ";";       /* Character used for separati
  *
  * The fonts array here will only be read once when the fonts are initially loaded.
  */
-static const char *fonts[]          = { "Hack:size=12", "Symbols Nerd Font:size=12" };
+
+static const char *fonts[]          = { DEFAULT_FONT":size=14:style=Bold" };
 /* This specifies the font used for dmenu when called via dwm. */
-static const char dmenufont[]       = "size=12";
+static const char dmenufont[]       = DEFAULT_FONT":size=14:style=Bold";
 
 /* The variables here are merely intended to give a names to the colour codes.
  *
@@ -105,32 +103,21 @@ static const char dmenufont[]       = "size=12";
  * leave the colors array as-is when changing colours. This is particularly used in relation to
  * Xresources.
  */
-static const char col_gray3[]       = "#f1be9b"; 
-static const char col_gray1[]       = "#020914";
-static const char col_gray2[]       = "#a8856c";
-static const char col_gray4[]       = "#f1be9b"; 
-static const char col_cyan[]        = "#63576E";
-
-static const unsigned int baralpha = 140;
-static const unsigned int borderalpha = 140;
-
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_gray4 },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
-
-static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
-};
-
 
 /* These define the tag icons (or text) used in the bar while the number of strings in the array
  * determine the number of tags being used by dwm. This has an upper limit of 32 tags and anything
  * above that will result in a compilation error. */
-static const char *tags[] = { "", "", "", "", "", "", };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 /* This array controls the client rules which consists of three rule matching filters (the class,
  * instance and title) and three rule options (tags, whether the client is floating or not and the
@@ -159,8 +146,7 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 /* This controls whether or not the window manager will respect the size hints of a client window
  * when the client is tiled. Refer to the applysizehints function writeup for more details. */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-static const int attachbelow = 1;    /* 1 means attach after the currently active window */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 /* The lockfullscreen variable controls whether or not focus is allowed to drift from a fullscreen
  * window. Refer to the writeup of the focusstack function for which this feature is isolated. */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -253,10 +239,6 @@ static const char *termcmd[]  = { "alacritty", NULL };
  * Refer to the keypress function for details on how the window manager interprets the events
  * received for the key combinations and calls the designated functions. */
 static const Key keys[] = {
-static const char *prtscrcmd[] = { "flameshot", "gui", NULL};
-
-#include "movestack.c"
-static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
@@ -267,8 +249,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -293,7 +273,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-        { 0,			        XK_Print,  spawn,	   {.v = prtscrcmd } },
 };
 
 /* Mouse button definitions.
@@ -320,7 +299,7 @@ static Key keys[] = {
  * or
  *    { ClkClientWin,         MODKEY,         8,              myfunc,         {0} },
  **/
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
@@ -334,3 +313,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+

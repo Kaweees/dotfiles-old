@@ -7,10 +7,10 @@ typedef struct {
 
 /* This is an internal structure that represents a font. */
 typedef struct Fnt {
-  /* The display. */
+	/* The display. */
 	Display *dpy;
 	/* The font height. */
-  unsigned int h;
+	unsigned int h;
 	/* The actual font. */
 	XftFont *xfont;
 	/* The fontconfig pattern, used when searching for fonts. */
@@ -42,10 +42,7 @@ typedef struct {
 	int screen;
 	/* The root window. */
 	Window root;
-	Visual *visual;
-	unsigned int depth;
 	/* The drawable pixel map. */
-	Colormap cmap;
 	Drawable drawable;
 	/* The graphics context that handles colours. */
 	GC gc;
@@ -56,7 +53,7 @@ typedef struct {
 } Drw;
 
 /* Drawable abstraction */
-Drw *drw_create(Display *dpy, int screen, Window win, unsigned int w, unsigned int h, Visual *visual, unsigned int depth, Colormap cmap);
+Drw *drw_create(Display *dpy, int screen, Window win, unsigned int w, unsigned int h);
 void drw_resize(Drw *drw, unsigned int w, unsigned int h);
 void drw_free(Drw *drw);
 
@@ -64,11 +61,12 @@ void drw_free(Drw *drw);
 Fnt *drw_fontset_create(Drw* drw, const char *fonts[], size_t fontcount);
 void drw_fontset_free(Fnt* set);
 unsigned int drw_fontset_getwidth(Drw *drw, const char *text);
+unsigned int drw_fontset_getwidth_clamp(Drw *drw, const char *text, unsigned int n);
 void drw_font_getexts(Fnt *font, const char *text, unsigned int len, unsigned int *w, unsigned int *h);
 
 /* Colorscheme abstraction */
-void drw_clr_create(Drw *drw, Clr *dest, const char *clrname, unsigned int alpha);
-Clr *drw_scm_create(Drw *drw, const char *clrnames[], const unsigned int alphas[], size_t clrcount);
+void drw_clr_create(Drw *drw, Clr *dest, const char *clrname);
+Clr *drw_scm_create(Drw *drw, const char *clrnames[], size_t clrcount);
 
 /* Cursor abstraction */
 Cur *drw_cur_create(Drw *drw, int shape);

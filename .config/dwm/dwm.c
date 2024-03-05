@@ -498,9 +498,9 @@
  * button is released. */
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 /* The actual width of a client window includes the border and this macro helps calculate that. */
-#define WIDTH(X)                ((X)->w + 2 * (X)->bw + gappx)
+#define WIDTH(X)                ((X)->w + 2 * (X)->bw)
 /* The actual height of a client window includes the border and this macro helps calculate that. */
-#define HEIGHT(X)               ((X)->w + 2 * (X)->bw + gappx)
+#define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
 /* The TAGMASK macro gives a binary value that represents a valid bitmask according to how many
  * tags are defined.
  *
@@ -1494,7 +1494,7 @@ attach(Client *c)
  *
  * The stacking order is a linked list of client structures where one client refers to the next.
  * This list is primarily used:
- *    - for managing the order in which client windows placed on top of each other
+ *    - for managing the order in which client windows are placed on top of each other
  *
  * Refer to the writeup for the attach function for usage warnings.
  *
@@ -4365,34 +4365,11 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	 * The oldx, oldy, etc. values are only ever used in the setfullscreen function, so setting
 	 * those here is only in relation to the resizeclient call being made in that function.
 	 */
-  unsigned int n;
-  unsigned int gapoffset;
-  unsigned int gapincr;
-  Client *nbc;
+	c->oldx = c->x; c->x = wc.x = x;
+	c->oldy = c->y; c->y = wc.y = y;
+	c->oldw = c->w; c->w = wc.width = w;
+	c->oldh = c->h; c->h = wc.height = h;
 	wc.border_width = c->bw;
-  /* Get number of clients for the client's monitor */
-	for (n = 0, nbc = nexttiled(c->mon->clients); nbc; nbc = nexttiled(nbc->next), n++);
-
-	/* Do nothing if layout is floating */
-	if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
-		gapincr = gapoffset = 0;
-	} else {
-		/* Remove border and gap if layout is monocle or only one client */
-		if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
-			gapoffset = 0;
-			gapincr = -2 * borderpx;
-			wc.border_width = 0;
-		} else {
-			gapoffset = gappx;
-			gapincr = 2 * gappx;
-		}
-	}
-
-	c->oldx = c->x; c->x = wc.x = x + gapoffset;
-	c->oldy = c->y; c->y = wc.y = y + gapoffset;
-	c->oldw = c->w; c->w = wc.width = w - gapincr;
-	c->oldh = c->h; c->h = wc.height = h - gapincr;
-
 	/* This calls reconfigures the window's size, position and border according to the
 	 * XWindowChanges structure that have been populated with data above. */
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
@@ -5404,7 +5381,7 @@ setup(void)
 	updatestatus();
 
 	/* Supporting window for NetWMCheck. In order to be taken seriously and to be considered as
-	 * a valid, complianet and proper window manager we need to have a dummy window representing
+	 * a valid, compliant and proper window manager we need to have a dummy window representing
 	 * the window manager.
 	 *
 	 * As per https://specifications.freedesktop.org/wm-spec/1.3/ar01s03.html we have that:
@@ -5887,7 +5864,7 @@ tile(Monitor *m)
 			 *    0              - this resize is not the result of the user interacting
 			 *                     with the window
 			 */
-			resize(c, m->wx, m->wy + my, mw - (2*c->bw) + (n > 1 ? gappx : 0), h - (2*c->bw), 0);
+			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
 
 			/* We increment the master y position with the height of the client after
 			 * the resize so that we know where the next client can be positioned.
@@ -6875,10 +6852,10 @@ updatewindowtype(Client *c)
 	 */
 	Atom state = getatomprop(c, netatom[NetWMState]);
 
-	/* This reads the property value of _NET_WM_WINDOW_TYPE_DIALOG, e.g.
+	/* This reads the property value of _NET_WM_WINDOW_TYPE, e.g.
 	 *
 	 *    $ xprop | grep _NET_WM_WINDOW_TYPE
-	 *    __NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DIALOG
+	 *    _NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DIALOG
 	 */
 	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
 

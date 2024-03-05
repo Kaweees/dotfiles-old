@@ -50,8 +50,8 @@ void
 die(const char *fmt, ...)
 {
 	va_list ap;
-  
-  /* Note how the function ends with , ... - this means that the function takes variable
+
+	/* Note how the function ends with , ... - this means that the function takes variable
 	 * arguments. Have a look at the tutorial on these macros for more information, but the gist
 	 * of it is that it allows for calls to die on this form:
 	 *
@@ -63,16 +63,17 @@ die(const char *fmt, ...)
 	vfprintf(stderr, fmt, ap);
 	va_end(ap);
 
-  /* If the error string ends with a colon then print the error that happened as well. */
+	/* If the error string ends with a colon then print the error that happened as well. */
 	if (fmt[0] && fmt[strlen(fmt)-1] == ':') {
 		fputc(' ', stderr);
-    /* The perror function displays the description of the error that corresponds to an error
+		/* The perror function displays the description of the error that corresponds to an error
 		 * code stored in the system variable errno. */
 		perror(NULL);
 	} else {
 		fputc('\n', stderr);
 	}
-  /* Stop the process passing 1 to exit to signify failure. */
+
+	/* Stop the process passing 1 to exit to signify failure. */
 	exit(1);
 }
 

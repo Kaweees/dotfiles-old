@@ -1,0 +1,22 @@
+name: C Quality Check and Formatting
+on: [push, pull_request]
+jobs:
+  formatting-check:
+    name: clang-format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Install clang-format
+        run: sudo apt install clang-format
+      - name: Run clang-format
+        run : |
+          clang-format -style=file -i $(find . -name "*.c" -o -name "*.h")
+          clang-format -style=file -i $(find . -name "*.cpp" -o -name "*.hpp")
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: ${{ github.actor }}
+          author_email: ${{ github.actor }}@users.noreply.github.com
+          message: "Code formatting and linting"
+          add: "." # Add all files
