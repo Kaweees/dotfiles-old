@@ -895,6 +895,7 @@ static int applysizehints(
 static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
+static void attachbottom(Client *c);
 static void attachstack(Client *c);
 static void buttonpress(XEvent *e);
 static void checkotherwm(void);
@@ -1571,6 +1572,13 @@ void attach(Client *c) {
    * given client becomes the first client in the linked list. */
   c->next = c->mon->clients;
   c->mon->clients = c;
+}
+
+void attachbottom(Client *c) {
+	Client **tc;
+	c->next = NULL;
+	for (tc = &c->mon->clients; *tc; tc = &(*tc)->next);
+	*tc = c;
 }
 
 /* This inserts a client at the top of the monitor's stacking order.
@@ -3960,7 +3968,7 @@ void manage(Window w, XWindowAttributes *wa) {
   if (c->isfloating) XRaiseWindow(dpy, c->win);
   /* Add the client to the client list. New clients are always added at the top
    * of the list making them the new master client. */
-  attach(c);
+  attachbottom(c);
   /* Add the client to the stacking order list. New additions are always added
    * at the top of the list to indicate order in which clients had focus. */
   attachstack(c);
@@ -4386,7 +4394,7 @@ void pop(Client *c) {
    * stack (list of clients) and adds it again at the start of the list making
    * it the new master window. */
   detach(c);
-  attach(c);
+  attachbottom(c);
   focus(c);        /* Make sure the given window has input focus */
   arrange(c->mon); /* Rearrange all tiled windows as the order has changed */
 }
@@ -5073,7 +5081,7 @@ void sendmon(Client *c, Monitor *m) {
    * viewed tags on that monitor. */
   c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
   /* Add the client to the target monitor's client list. */
-  attach(c);
+  attachbottom(c);
   /* Add the client to the target monitor's stacking order list. */
   attachstack(c);
 
