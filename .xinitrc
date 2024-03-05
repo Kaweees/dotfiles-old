@@ -23,7 +23,7 @@ if [[ -f "$usermodmap" ]]; then
 fi
 
 # start some nice programs
-feh --bg-fill ~/.config/wallpapers/custom.png
 xrandr --output eDP-1 --mode 1920x1200
+feh --bg-fill ~/.config/wallpapers/custom.png
 picom &
 exec dwm
