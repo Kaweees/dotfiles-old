@@ -53,3 +53,10 @@ dkms.conf
 
 # DWM files
 dwm
+*.sh
+*.txt
+dwm
+config.h
+transient
+*.rej
+*.orig

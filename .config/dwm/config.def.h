@@ -29,6 +29,7 @@
 
 /* The border pixel determines the size of the window border. */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 6;        /* gaps between windows */
 /* The snap pixel controls two things:
  *    - how close to the window area border a window must be before it "snaps" (or docks) against
  *      that border when moving a floating window using the mouse
@@ -143,7 +144,7 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 /* This controls whether or not the window manager will respect the size hints of a client window
  * when the client is tiled. Refer to the applysizehints function writeup for more details. */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 /* The lockfullscreen variable controls whether or not focus is allowed to drift from a fullscreen
  * window. Refer to the writeup of the focusstack function for which this feature is isolated. */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -228,7 +229,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
  */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 /* dwm launches st as the terminal of choice by default. */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 /* The keys array contains user defined keybindings and the functions that said keybindings should
  * run. Refer to the grabkeys function for details on how the window manager tells the X server
