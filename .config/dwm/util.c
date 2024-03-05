@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* The util library comes from libsl which contains some functionality that is common for several
- * suckless project, e.g. dmenu and dwm.
+/* The util library comes from libsl which contains some functionality that is
+ * common for several suckless project, e.g. dmenu and dwm.
  *
  * @see https://git.suckless.org/libsl/files.html
  */
@@ -46,39 +46,39 @@
  *    ~ -> drawbar -> drw_text -> die
  *    ~ -> drawbar -> drw_fontset_getwidth -> drw_text -> die
  */
-void
-die(const char *fmt, ...)
-{
-	va_list ap;
+void die(const char *fmt, ...) {
+  va_list ap;
 
-	/* Note how the function ends with , ... - this means that the function takes variable
-	 * arguments. Have a look at the tutorial on these macros for more information, but the gist
-	 * of it is that it allows for calls to die on this form:
-	 *
-	 *    die("error, cannot allocate color '%s'", clrname);
-	 *
-	 * where the %s is substituted for the value of the clrname variable.
-	 */
-	va_start(ap, fmt);
-	vfprintf(stderr, fmt, ap);
-	va_end(ap);
+  /* Note how the function ends with , ... - this means that the function takes
+   * variable arguments. Have a look at the tutorial on these macros for more
+   * information, but the gist of it is that it allows for calls to die on this
+   * form:
+   *
+   *    die("error, cannot allocate color '%s'", clrname);
+   *
+   * where the %s is substituted for the value of the clrname variable.
+   */
+  va_start(ap, fmt);
+  vfprintf(stderr, fmt, ap);
+  va_end(ap);
 
-	/* If the error string ends with a colon then print the error that happened as well. */
-	if (fmt[0] && fmt[strlen(fmt)-1] == ':') {
-		fputc(' ', stderr);
-		/* The perror function displays the description of the error that corresponds to an error
-		 * code stored in the system variable errno. */
-		perror(NULL);
-	} else {
-		fputc('\n', stderr);
-	}
+  /* If the error string ends with a colon then print the error that happened as
+   * well. */
+  if (fmt[0] && fmt[strlen(fmt) - 1] == ':') {
+    fputc(' ', stderr);
+    /* The perror function displays the description of the error that
+     * corresponds to an error code stored in the system variable errno. */
+    perror(NULL);
+  } else {
+    fputc('\n', stderr);
+  }
 
-	/* Stop the process passing 1 to exit to signify failure. */
-	exit(1);
+  /* Stop the process passing 1 to exit to signify failure. */
+  exit(1);
 }
 
-/* Memory allocation wrapper around calloc that calls die in the event that memory could not be
- * allocated.
+/* Memory allocation wrapper around calloc that calls die in the event that
+ * memory could not be allocated.
  *
  * @called_from drw_cur_create to allocate memory for a cursor
  * @called_from drw_scm_create to allocate memory for the colour scheme
@@ -103,13 +103,11 @@ die(const char *fmt, ...)
  *    run -> maprequest -> manage -> ecalloc
  *    run -> scan -> manage -> ecalloc
  */
-void *
-ecalloc(size_t nmemb, size_t size)
-{
-    void *p;
+void *ecalloc(size_t nmemb, size_t size) {
+  void *p;
 
-    /* If memory could not be allocated then call die to exit the window manager. */
-    if (!(p = calloc(nmemb, size)))
-        die("calloc:");
-    return p;
+  /* If memory could not be allocated then call die to exit the window manager.
+   */
+  if (!(p = calloc(nmemb, size))) die("calloc:");
+  return p;
 }
