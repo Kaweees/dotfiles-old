@@ -107,6 +107,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias wifi-gui='nm-connection-editornm-connection-editor'
+alias wifi-tui='nmtui'
 alias install-fonts='~/bin/install-fonts.sh' # install fonts
 alias rars='java -jar ~/opt/riscv/rars/rars.jar &' # RARS simulator
 alias vivado='tools/Xilinx/Vivado/2022.2/bin/vivado &' # Vivado 2020.2
