@@ -1,0 +1,21 @@
+! Display
+Xft.dpi: 220
+
+! Font
+*font: Terminus:size=10
+*rofifont: Terminus 23
+*user_bh: 0
+
+! Colors
+*foreground: gray
+
+! dwm appearance
+*norm_fg: #dadada
+*norm_bg: #0a0a0a
+*norm_border: #555555
+
+*sel_fg: #dadada
+*sel_bg: #005577
+*sel_border: #a8a8a8
+
+*borderpx: 3
