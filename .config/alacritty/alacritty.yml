@@ -40,7 +40,7 @@ window:
   # - none: neither borders nor title bar
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
-  decorations: buttonless
+  decorations: none
 
   # Startup Mode (changes require restart)
   #
@@ -54,7 +54,7 @@ window:
   startup_mode: Windowed
 
   # Background opacity
-  opacity: 1.0
+  opacity: 0.75
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
@@ -81,10 +81,10 @@ font:
   # The italic font face
   italic:
     family: "Mono Lisa Nerd Font"
-    style: "Light Italic"
+    style: italic
 
   # Point size of the font
-  size: 14.0
+  size: 9.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -98,22 +98,7 @@ font:
   glyph_offset:
     x: 0
     y: 0
-
-  # Thin stroke font rendering (macOS only)
-  #
-  # Thin strokes are suitable for retina displays, but for non-retina you
-  # probably want this set to false.
-  #
-  # macOS >= 10.14.x:
-  #
-  # If the font quality on non-retina display looks bad then set
-  # `use_thin_strokes` to `true` and enable font smoothing by running the
-  # following command:
-  #   `defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`
-  #
-  # This is a global setting and will require a log out or restart to take
-  # effect.
-  use_thin_strokes: true
+  
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: false
@@ -129,7 +114,7 @@ colors:
     foreground: '0xc5c8c6'
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '0x090300'
+    text: '0x00ff00'
     cursor: '0xc5c8c6'
   # Normal colors
   normal:
@@ -147,10 +132,10 @@ colors:
     red:     '0xde935f'
     green:   '0x282a2e'
     yellow:  '0x373b41'
-    blue:    '0x807d7c'
-    magenta: '0xd6d5d4'
-    cyan:    '0xcdab53'
-    white:   '0xf7f7f7'
+    blue:    '0xb4b7b4'
+    magenta: '0xe0e0e0'
+    cyan:    '0xa3685a'
+    white:   '0xffffff'
 
 # Indexed Colors
 #
@@ -188,7 +173,6 @@ bell:
   animation: EaseOutExpo
   color: '0xffffff'
   duration: 0
-
 
 # Key bindings
 #
@@ -455,7 +439,5 @@ debug:
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
   program: /usr/bin/zsh
-  args:
-    - --command=tmux
 
 vim: nospell
