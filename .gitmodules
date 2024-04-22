@@ -13,3 +13,6 @@
 [submodule ".config/dwm"]
 	path = .config/dwm
 	url = https://github.com/Kaweees/dwm.git
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/Kaweees/nvim.git

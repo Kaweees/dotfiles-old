@@ -32,6 +32,11 @@ Alternatively, to update while also avoiding the confirmation prompt:
 set -- -f; source setup.sh
 ```
 
+```
+git submodule update --init --recursive
+```
+
+
 <!-- PROJECT FILE STRUCTURE -->
 ## Project Structure
 
