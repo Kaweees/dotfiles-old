@@ -2,8 +2,8 @@
 Xft.dpi: 220
 
 ! Font
-*font: Terminus:size=10
-*rofifont: Terminus 23
+*font: Mono Lisa Nerd Font:size=10
+*rofifont: Mono Lisa Nerd Font 23
 *user_bh: 0
 
 ! Colors
