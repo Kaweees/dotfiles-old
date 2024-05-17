@@ -53,7 +53,7 @@ You can clone the repository wherever you want. (I like to keep it in `~/Documen
 ```bash
 sudo apt update -y
 sudo apt install git -y
-git clone https://github.com/kaweees/dotfiles.git && cd dotfiles && source setup.sh
+git clone https://github.com/kaweees/dotfiles.git --recursive && cd dotfiles && source setup.sh
 ```
 
 To update, `cd` into your local `dotfiles` repository and then:
