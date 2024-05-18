@@ -1,0 +1,96 @@
+import argparse, os, subprocess
+from typing import List, Dict
+
+# Exit codes
+EXIT_SUCCESS: int = 0
+EXIT_FAILURE: int = -1
+
+# Get locations of the home directory and the dotfiles directory
+HOME_DIR: str = os.getenv('HOME')
+DOTFILES_DIR: str = os.getenv('DOTFILES')
+
+DOTFILES: Dict[str, Dict[str, str]] = {
+   "alacritty": {
+    "source": f"{DOTFILES_DIR}/.config/alacritty/",
+    "target": f"{HOME_DIR}/.config/alacritty/"
+  },
+  "htop" : {
+    "source": f"{DOTFILES_DIR}/.config/htop/",
+    "target": f"{HOME_DIR}/.config/htop/"
+  },
+  "nvim": {
+    "source": f"{DOTFILES_DIR}/.config/nvim/",
+    "target": f"{HOME_DIR}/.config/nvim"
+  },
+  "picom": {
+    "source": f"{DOTFILES_DIR}/.config/picom/",
+    "target": "{HOME_DIR}/.config/picom/"
+  },
+  "tmux": {
+    "source": f"{DOTFILES_DIR}/.config/tmux/",
+    "target": f"{HOME_DIR}/.config/tmux/"
+  },
+  "xorg": {
+    "source": f"{DOTFILES_DIR}/.config/xorg/",
+    "target": f"{HOME_DIR}/"
+  },
+  "zsh": {
+    "source": f"{DOTFILES_DIR}/.config/zsh/",
+    "target": f"{HOME_DIR}/"
+  },
+}
+
+def add(program: str):
+  # Construct the command
+  command = ['stow', '--restow', '--dir', f'{DOTFILES[program]["source"]}', '--target', f'{DOTFILES[program]["target"]}']
+  # print(f"Command: {' '.join(command)}")
+  
+  # Execute the command
+  try:
+      result = subprocess.run(command, check=True, text=True, capture_output=True)
+      print(result.stdout)
+  except subprocess.CalledProcessError as e:
+      print(f'Error executing command: {e.stderr}')
+      exit(EXIT_FAILURE)
+  pass
+
+def remove(program: str):
+  # Construct the command
+  command = ['stow', '--delete', '--dir', f'{DOTFILES[program]["target"]}']
+  # print(f"Command: {' '.join(command)}")
+  
+  # Execute the command
+  try:
+      result = subprocess.run(command, check=True, text=True, capture_output=True)
+      print(result.stdout)
+  except subprocess.CalledProcessError as e:
+      print(f'Error executing command: {e.stderr}')
+      exit(EXIT_FAILURE)
+  pass
+
+def main(action: str, program: str):
+  if action == "add":
+    add(program)
+  elif action == "remove":
+    remove(program)
+  elif action == "view":
+    print(f"Source: {DOTFILES[program]['source']}")
+    print(f"Target: {DOTFILES[program]['target']}")
+  else:
+    print(f"Error: Invalid action '{action}'")
+    exit(EXIT_FAILURE)
+  exit(EXIT_SUCCESS)
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser(description="Manage the symlinks of dotfiles using GNU Stow")
+  parser.add_argument("action", help="The action to be performed", choices=["add", "remove", "view"])
+  parser.add_argument("program", help="The program's dotfiles to be processed", choices=DOTFILES.keys())
+  args = parser.parse_args()
+
+  # Check if the number of arguments is correct
+  if len(args.__dict__) != 2:
+    parser.print_usage()
+    exit(EXIT_FAILURE)
+
+# Call main function with the parsed argument
+  main(args.action, args.program)
