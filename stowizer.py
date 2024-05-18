@@ -8,6 +8,8 @@ EXIT_FAILURE: int = -1
 # Get locations of the home directory and the dotfiles directory
 HOME_DIR: str = os.getenv('HOME')
 DOTFILES_DIR: str = os.getenv('DOTFILES')
+if (DOTFILES_DIR is None):
+    DOTFILES_DIR = os.path.dirname(os.path.realpath(__file__))
 
 DOTFILES: Dict[str, Dict[str, str]] = {
    "alacritty": {
@@ -42,9 +44,13 @@ DOTFILES: Dict[str, Dict[str, str]] = {
 
 def add(program: str):
   # Construct the command
-  command = ['stow', '--restow', '--dir', f'{DOTFILES[program]["source"]}', '--target', f'{DOTFILES[program]["target"]}']
-  # print(f"Command: {' '.join(command)}")
-  
+  command = ['stow', '--restow', '--dir', f'{DOTFILES[program]["source"]}', '--target', f'{DOTFILES[program]["target"]}', "."]
+  print(f"Command: {' '.join(command)}")
+
+  # Check if destination directory exists, if not create it
+  if not os.path.exists(f'{DOTFILES[program]["target"]}'):
+      os.makedirs(f'{DOTFILES[program]["target"]}')
+
   # Execute the command
   try:
       result = subprocess.run(command, check=True, text=True, capture_output=True)
