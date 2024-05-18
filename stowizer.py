@@ -43,13 +43,16 @@ DOTFILES: Dict[str, Dict[str, str]] = {
 }
 
 def add(program: str):
-  # Construct the command
-  command = ['stow', '--restow', '--dir', f'{DOTFILES[program]["source"]}', '--target', f'{DOTFILES[program]["target"]}', "."]
-  print(f"Command: {' '.join(command)}")
+  source_dir = DOTFILES[program]["source"]
+  target_dir = DOTFILES[program]["target"]
 
   # Check if destination directory exists, if not create it
-  if not os.path.exists(f'{DOTFILES[program]["target"]}'):
-      os.makedirs(f'{DOTFILES[program]["target"]}')
+  if not os.path.exists(target_dir):
+      os.makedirs(target_dir)
+
+  # Construct the command
+  command = ['stow', '--restow', f'--dir={source_dir}', f'--target={target_dir}', '.']
+  print(f"Command: {' '.join(command)}")
 
   # Execute the command
   try:
