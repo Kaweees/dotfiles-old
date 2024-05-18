@@ -11,7 +11,7 @@ DOTFILES_DIR: str = os.getenv('DOTFILES')
 if (DOTFILES_DIR is None):
     DOTFILES_DIR = os.path.dirname(os.path.realpath(__file__))
 
-DOTFILES: Dict[str, Dict[str, str]] = {
+DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
    "alacritty": {
     "source": f"{DOTFILES_DIR}/.config/alacritty/",
     "target": f"{HOME_DIR}/.config/alacritty/"
@@ -42,49 +42,33 @@ DOTFILES: Dict[str, Dict[str, str]] = {
   },
 }
 
-def add(program: str):
+# DOTFILES["all"] = choices=DOTFILES.keys()
+
+def stowizer(action: str, program: str):
   source_dir = DOTFILES[program]["source"]
   target_dir = DOTFILES[program]["target"]
 
-  # Check if destination directory exists, if not create it
-  if not os.path.exists(target_dir):
-      os.makedirs(target_dir)
+  if action == "add" or action == "remove":
+      # Check if destination directory exists, if not create it
+      if not os.path.exists(target_dir):
+          os.makedirs(target_dir)
 
-  # Construct the command
-  command = ['stow', '--restow', f'--dir={source_dir}', f'--target={target_dir}', '.']
-  print(f"Command: {' '.join(command)}")
+      # Construct the command
+      command = ['stow', "--restow" if action == "add" else "--delete", f'--dir={source_dir}', f'--target={target_dir}', '.']
+      print(f"Command: {' '.join(command)}")
 
-  # Execute the command
-  try:
-      result = subprocess.run(command, check=True, text=True, capture_output=True)
-      print(result.stdout)
-  except subprocess.CalledProcessError as e:
-      print(f'Error executing command: {e.stderr}')
-      exit(EXIT_FAILURE)
-  pass
-
-def remove(program: str):
-  # Construct the command
-  command = ['stow', '--delete', '--dir', f'{DOTFILES[program]["target"]}']
-  # print(f"Command: {' '.join(command)}")
-  
-  # Execute the command
-  try:
-      result = subprocess.run(command, check=True, text=True, capture_output=True)
-      print(result.stdout)
-  except subprocess.CalledProcessError as e:
-      print(f'Error executing command: {e.stderr}')
-      exit(EXIT_FAILURE)
-  pass
-
-def main(action: str, program: str):
-  if action == "add":
-    add(program)
-  elif action == "remove":
-    remove(program)
+      # Execute the command
+      try:
+          result = subprocess.run(command, check=True, text=True, capture_output=True)
+          print(result.stdout)
+      except subprocess.CalledProcessError as e:
+          print(f'Error executing command: {e.stderr}')
+          exit(EXIT_FAILURE)
+      pass
+     
   elif action == "view":
-    print(f"Source: {DOTFILES[program]['source']}")
-    print(f"Target: {DOTFILES[program]['target']}")
+    print(f"Source: {source_dir}")
+    print(f"Target: {target_dir}")
   else:
     print(f"Error: Invalid action '{action}'")
     exit(EXIT_FAILURE)
@@ -101,5 +85,6 @@ if __name__ == "__main__":
     parser.print_usage()
     exit(EXIT_FAILURE)
 
-# Call main function with the parsed argument
-  main(args.action, args.program)
+# Call stowizer function with the parsed argument
+  stowizer(args.action, args.program)
+
