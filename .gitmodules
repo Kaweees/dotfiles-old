@@ -16,6 +16,4 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = https://github.com/Kaweees/nvim.git
-[submodule ".config/zsh"]
-	path = .config/zsh
-	url = https://github.com/Kaweees/zsh.git
+
