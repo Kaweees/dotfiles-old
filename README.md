@@ -57,7 +57,7 @@ git clone https://github.com/Kaweees/dotfiles.git ~/Documents/GitHub/Projects/do
 ```
 
 ```
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
 ```
 
 
