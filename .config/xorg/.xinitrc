@@ -29,6 +29,6 @@ xrdb -merge  ~/.Xresources &
 xrandr --output eDP-1 --mode 3840x2400 &
 xrandr --output eDP-1 --gamma 1:0.95:1 &
 numlockx on &
-~/.scripts/kiwibar.sh &
+slstatus &
 autorandr --change &
 exec dbus-run-session -- dwm

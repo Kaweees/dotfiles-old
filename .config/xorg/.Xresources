@@ -2,8 +2,8 @@
 Xft.dpi: 220
 
 ! Font
-*font: Mono Lisa Nerd Font:size=10
-*rofifont: Mono Lisa Nerd Font 23
+*font: JetBrains Mono Nerd Font:size=10
+*rofifont: JetBrains Mono Nerd Font 20
 *user_bh: 0
 
 ! Colors
