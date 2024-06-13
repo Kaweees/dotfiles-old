@@ -26,7 +26,7 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
   },
   "picom": {
     "source": f"{DOTFILES_DIR}/.config/picom/",
-    "target": "{HOME_DIR}/.config/picom/"
+    "target": f"{HOME_DIR}/.config/picom/"
   },
   "tmux": {
     "source": f"{DOTFILES_DIR}/.config/tmux/",
@@ -44,6 +44,10 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
     "source": f"{DOTFILES_DIR}/.fonts/",
     "target": f"/usr/local/share/fonts/"
   },
+  "wallpapers": {
+    "source": f"{DOTFILES_DIR}/.wallpapers",
+    "target": f"{HOME_DIR}/.config/wallpapers/custom.png"
+  }
 }
 
 # DOTFILES["all"] = choices=DOTFILES.keys()
