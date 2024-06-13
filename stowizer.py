@@ -40,6 +40,10 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
     "source": f"{DOTFILES_DIR}/.config/zsh/",
     "target": f"{HOME_DIR}/"
   },
+  "fonts" : {
+    "source": f"{DOTFILES_DIR}/.fonts/",
+    "target": f"/usr/local/share/fonts/"
+  },
 }
 
 # DOTFILES["all"] = choices=DOTFILES.keys()
