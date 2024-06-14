@@ -24,6 +24,7 @@ fi
 
 # start some nice programs
 picom -b --experimental-backends &
+xrdb -merge .Xresources
 feh --bg-fill ~/.config/wallpapers/custom.png &
 xrdb -merge  ~/.Xresources &
 xrandr --output eDP-1 --mode 3840x2400 &
