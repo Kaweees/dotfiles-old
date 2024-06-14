@@ -47,6 +47,10 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
   "wallpapers": {
     "source": f"{DOTFILES_DIR}/.wallpapers",
     "target": f"{HOME_DIR}/.config/wallpapers/custom.png"
+  },
+  "scripts" : {
+    "source": f"{DOTFILES_DIR}/.scripts",
+    "target": f"{HOME_DIR}/.scripts"
   }
 }
 
