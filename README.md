@@ -43,6 +43,7 @@ Here are some details about my setup:
 + **Editor**: [Neovim](https://neovim.io/)
 + **Browser**: [Vivaldi](https://vivaldi.com)
 + **Color Scheme**: [gruvbox](https://github.com/morhetz/gruvbox)
++ **Font**: [FiraCode Nerd Font](https://github.com/kranack/FiraCode) [(cheatsheet)](https://www.nerdfonts.com/cheat-sheet)
 
 ## Installation
 

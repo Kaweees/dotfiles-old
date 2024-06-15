@@ -2,8 +2,8 @@
 Xft.dpi: 220
 
 ! Font
-*font: Mono Lisa Nerd Font:size=10
-*rofifont: Mono Lisa Nerd Font 23
+*font: FiraCode Nerd Font:size=20
+*rofifont: FiraCode Nerd Font 20
 *user_bh: 0
 
 ! Colors
@@ -18,4 +18,4 @@ Xft.dpi: 220
 *sel_bg: #005577
 *sel_border: #a8a8a8
 
-*borderpx: 3
+*borderpx: 10
