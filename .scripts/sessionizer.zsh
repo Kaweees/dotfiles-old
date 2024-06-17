@@ -105,7 +105,7 @@ selected=$(echo "$projects" |
     \
     \
     \
-    --preview="$HOME/.config/zsh/mts-show-project.zsh ''{}''" \
+    --preview="$HOME/.scripts/mts-show-project.zsh ''{}''" \
     --preview-window=border-left,60% \
     --preview-window=border-sharp \
 )

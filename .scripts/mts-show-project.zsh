@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
-project="$1"@@@@@@
-@@@
+project="$1"
+
 project=$(\
   echo "$project" |\
     sed --regexp-extended "s/^.{1,2} (\S+)\//projects\/\1\//g" |\
