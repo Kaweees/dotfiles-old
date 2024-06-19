@@ -33,10 +33,11 @@ This is my personal collection of configuration files. The [setup section](#inst
 Here are some details about my setup:
 
 + **Operating System**: [Debian 12 ("bookworm")](https://www.debian.org/releases/bookworm/)
-+ **Display server**: [Xorg](https://www.x.org/wiki/)
++ **Display Server**: [Xorg](https://www.x.org/wiki/)
++ **Notification Server** [dunst](https://github.com/dunst-project/dunst)
 + **Window Manager**: [dwm](https://tools.suckless.org/dwm/)
-+ **Status Bar**: [dmenu](https://tools.suckless.org/dmenu/)
-+ **Launcher**: [rofi](https://davatorium.github.io/rofi/)
++ **Status Bar**: [slstatus](https://tools.suckless.org/slstatus/)
++ **Program Launcher**: [rofi](https://davatorium.github.io/rofi/)
 + **Terminal**: [st](https://st.suckless.org/)
 + **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
 + **Shell**: [zsh](https://www.zsh.org/)
