@@ -51,6 +51,10 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
   "scripts" : {
     "source": f"{DOTFILES_DIR}/.scripts",
     "target": f"{HOME_DIR}/.scripts"
+  },
+  "dunst" : {
+    "source": f"{DOTFILES_DIR}/.config/dunst",
+    "target" : f"{HOME_DIR}/.config/dunst"
   }
 }
 

@@ -23,6 +23,8 @@ if [[ -f "$usermodmap" ]]; then
 fi
 
 # start some nice programs
+# dunst (notification server)
+dunst -conf ~/.config/dunst/dunstrc &
 picom -b --experimental-backends &
 xrdb -merge .Xresources
 feh --bg-fill ~/.config/wallpapers/custom.png &
