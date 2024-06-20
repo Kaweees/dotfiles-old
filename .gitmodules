@@ -20,3 +20,6 @@
 [submodule ".config/zsh"]
 	path = .config/zsh
 	url = https://github.com/Kaweees/zsh.git
+[submodule ".config/slstatus"]
+	path = .config/slstatus
+	url = https://github.com/Kaweees/slstatus
