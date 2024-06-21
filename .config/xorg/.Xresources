@@ -10,12 +10,16 @@ Xft.dpi: 220
 *foreground: gray
 
 ! dwm appearance
-*norm_fg: #dadada
-*norm_bg: #0a0a0a
-*norm_border: #555555
+norm_fg: #dadada
+norm_bg: #0a0a0a
+norm_border: #555555
 
-*sel_fg: #dadada
-*sel_bg: #005577
-*sel_border: #a8a8a8
+sel_fg: #dadada
+dwm*sel_bg: #800700
+sel_border: #a8a8a8
 
-*borderpx: 10
+borderpx: 4
+
+gappih: 6
+gappiv: 6
+

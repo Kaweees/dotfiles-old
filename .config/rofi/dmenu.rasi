@@ -1,0 +1,56 @@
+/**
+ * ROFI Color theme
+ * User: Qball
+ * Copyright: Dave Davenport
+ * Modified by Hayden Buscher
+ */
+
+* {
+    padding: 1 0 1 0;
+    border: 0;
+    background-color:       black;
+    text-color:             #dadada;
+//  font:                   "Terminus 9";
+    border-color:           black;
+}
+window {
+    anchor:     north;
+    location:   north;
+    width:      100%;
+    children:   [ horibox ];
+}
+horibox {
+    orientation: horizontal;
+    children:   [ prompt, entry, listview ];
+}
+listview {
+    layout:     horizontal;
+    spacing:    5px;
+    lines:      100;
+    scrollbar:  0;
+}
+entry {
+    expand:     false;
+    width:      10em;
+}
+
+element {
+    padding: 0 5 1 5;
+    margin: 0px;
+}
+
+element selected {
+    background-color: #005577;
+}
+
+element-text {
+    background-color: inherit;
+    horizontal-align: 1.0;
+    /* vertical-align: 1.0; */
+}
+
+
+prompt {
+    padding: 0 5 0 0;
+}
+

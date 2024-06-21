@@ -22,7 +22,7 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
   },
   "nvim": {
     "source": f"{DOTFILES_DIR}/.config/nvim/",
-    "target": f"{HOME_DIR}/.config/nvim"
+    "target": f"{HOME_DIR}/.config/nvim/"
   },
   "picom": {
     "source": f"{DOTFILES_DIR}/.config/picom/",
@@ -45,16 +45,20 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
     "target": f"/usr/local/share/fonts/"
   },
   "wallpapers": {
-    "source": f"{DOTFILES_DIR}/.wallpapers",
-    "target": f"{HOME_DIR}/.config/wallpapers/custom.png"
+    "source": f"{DOTFILES_DIR}/.wallpapers/",
+    "target": f"{HOME_DIR}/.config/wallpapers/"
   },
   "scripts" : {
-    "source": f"{DOTFILES_DIR}/.scripts",
-    "target": f"{HOME_DIR}/.scripts"
+    "source": f"{DOTFILES_DIR}/.scripts/",
+    "target": f"{HOME_DIR}/.scripts/"
   },
   "dunst" : {
-    "source": f"{DOTFILES_DIR}/.config/dunst",
-    "target" : f"{HOME_DIR}/.config/dunst"
+    "source": f"{DOTFILES_DIR}/.config/dunst/",
+    "target" : f"{HOME_DIR}/.config/dunst/"
+  },
+  "rofi" : {
+      "source": f"{DOTFILES_DIR}/.config/rofi/",
+      "target": f"{HOME_DIR}/.config/rofi/"
   }
 }
 
