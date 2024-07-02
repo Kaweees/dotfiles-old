@@ -59,6 +59,10 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
   "rofi" : {
       "source": f"{DOTFILES_DIR}/.config/rofi/",
       "target": f"{HOME_DIR}/.config/rofi/"
+  },
+  "git" : {
+      "source" : f"{DOTFILES_DIR}/.config/git",
+      "target" : f"{HOME_DIR}/"
   }
 }
 
