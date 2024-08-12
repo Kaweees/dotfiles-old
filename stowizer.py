@@ -63,7 +63,12 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
   "git" : {
       "source" : f"{DOTFILES_DIR}/.config/git",
       "target" : f"{HOME_DIR}/"
+  },
+  "aerospace" : {
+      "source" : f"{DOTFILES_DIR}/.config/aerospace",
+      "target" : f"{HOME_DIR}/"
   }
+
 }
 
 # DOTFILES["all"] = choices=DOTFILES.keys()
