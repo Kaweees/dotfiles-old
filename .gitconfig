@@ -6,7 +6,7 @@
 	# email = "..."
 
 [core]
-	editor = "nano"
+	editor = "nvim"
 
 	# Global ignore file. Must be double quotes here to evaluate.
 	excludesfile = "~/.gitignore"
