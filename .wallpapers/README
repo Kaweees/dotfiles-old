@@ -1,2 +1,0 @@
-sudo apt install feh
-feh --bg-fill picture.jpg
