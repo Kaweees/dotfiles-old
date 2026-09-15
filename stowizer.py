@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse, os, subprocess
 from typing import List, Dict
 from sys import exit
@@ -16,6 +18,10 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
     "alacritty": {
         "source": f"{DOTFILES_DIR}/.config/alacritty/",
         "target": f"{HOME_DIR}/.config/alacritty/",
+    },
+    "herdr": {
+        "source": f"{DOTFILES_DIR}/.config/herdr/",
+        "target": f"{HOME_DIR}/.config/herdr/",
     },
     "htop": {
         "source": f"{DOTFILES_DIR}/.config/htop/",

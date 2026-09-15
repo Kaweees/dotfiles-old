@@ -1,0 +1,62 @@
+onboarding = false
+
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+[ui]
+agent_panel_sort = "priority"
+
+# Keybindings mirroring ~/dotfiles-old/.config/tmux/tmux.conf
+# (custom bindings plus tmux defaults where herdr has an equivalent action)
+[keys]
+# tmux: set -g prefix C-Space
+prefix = "ctrl+space"
+
+# tmux: bind r source-file ...  (resize mode moves to prefix+shift+r)
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# tmux: bind h/j/k/l select-pane, prefix+arrows, M-arrows without prefix
+focus_pane_left = ["prefix+h", "prefix+left", "alt+left"]
+focus_pane_down = ["prefix+j", "prefix+down", "alt+down"]
+focus_pane_up = ["prefix+k", "prefix+up", "alt+up"]
+focus_pane_right = ["prefix+l", "prefix+right", "alt+right"]
+
+# tmux defaults: prefix+C-arrows resize the pane
+resize_pane_left = "prefix+ctrl+left"
+resize_pane_down = "prefix+ctrl+down"
+resize_pane_up = "prefix+ctrl+up"
+resize_pane_right = "prefix+ctrl+right"
+
+# tmux: bind '"' split-window -v / bind % split-window -h
+split_horizontal = "prefix+double_quote"
+split_vertical = "prefix+percent"
+
+# tmux windows -> herdr tabs: c, n, p, ",", &, 1..9
+# plus S-Left/S-Right and M-H/M-L without prefix
+new_tab = "prefix+c"
+next_tab = ["prefix+n", "shift+right", "alt+shift+l"]
+previous_tab = ["prefix+p", "shift+left", "alt+shift+h"]
+rename_tab = "prefix+comma"
+close_tab = "prefix+ampersand"
+switch_tab = "prefix+1..9"
+
+# tmux pane defaults: x kill, z zoom, o next pane, ; last pane, [ copy mode
+close_pane = "prefix+x"
+zoom = "prefix+z"
+cycle_pane_next = "prefix+o"
+last_pane = "prefix+semicolon"
+copy_mode = "prefix+["
+
+# tmux sessions -> herdr workspaces: d detach, $ rename, s/w choose-tree, ( ) cycle
+detach = "prefix+d"
+rename_workspace = "prefix+$"
+goto = "prefix+s"
+workspace_picker = "prefix+w"
+previous_workspace = "prefix+("
+next_workspace = "prefix+)"
+
+# Displaced herdr defaults (o and s were taken above)
+open_notification_target = "prefix+shift+o"
+settings = "prefix+shift+s"

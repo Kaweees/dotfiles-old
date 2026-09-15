@@ -50,16 +50,18 @@ Here are some details about my setup:
 
 ### Using Git and the setup script
 
-You can clone the repository wherever you want. (I like to keep it in `~/Documents/GitHub/dotfiles`, with `~/dotfiles` as a symlink.) The setup script will pull in the latest version and copy the files to your home folder.
+You can clone the repository wherever you want. (I like to keep it in `~/dotfiles` as a symlink.) The setup script will pull in the latest version and copy the files to your home folder.
 
 ```sh
-git clone https://github.com/Kaweees/dotfiles-old.git ~/Documents/GitHub/Projects/dotfiles-old --recurse-submodules && cd ~/Documents/GitHub/Projects/dotfiles-old && python3 stowizer.py add zsh
+git clone https://github.com/Kaweees/dotfiles-old.git ~/dotfiles --recurse-submodules && cd ~/dotfiles && python3 stowizer.py add zsh
 ```
 
 ```
 git submodule update --init --recursive --remote
 git submodule add <repo url> <location in repo>
 ```
+
+Only the configuration file is managed here; logs, sockets, and session state stay local.
 
 
 <!-- PROJECT FILE STRUCTURE -->
