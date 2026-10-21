@@ -1,8 +1,17 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["tyro"]
+# ///
+
 from __future__ import annotations
 
-import argparse, os, subprocess
-from typing import List, Dict
+import os, subprocess
+from typing import List, Dict, Literal
 from sys import exit
+
+import tyro
+from tyro.conf import Positional
 
 # Exit codes
 EXIT_SUCCESS: int = 0
@@ -71,8 +80,17 @@ DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
 
 # DOTFILES["all"] = choices=DOTFILES.keys()
 
+Action = Literal["add", "remove", "view"]
+Program = Literal[tuple(DOTFILES)]
 
-def stowizer(action: str, program: str):
+
+def stowizer(action: Positional[Action], program: Positional[Program]):
+    """Manage the symlinks of dotfiles using GNU Stow
+
+    Args:
+        action: The action to be performed
+        program: The program's dotfiles to be processed
+    """
     source_dir = DOTFILES[program]["source"]
     target_dir = DOTFILES[program]["target"]
 
@@ -103,30 +121,8 @@ def stowizer(action: str, program: str):
     elif action == "view":
         print(f"Source: {source_dir}")
         print(f"Target: {target_dir}")
-    else:
-        print(f"Error: Invalid action '{action}'")
-        exit(EXIT_FAILURE)
     exit(EXIT_SUCCESS)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Manage the symlinks of dotfiles using GNU Stow"
-    )
-    parser.add_argument(
-        "action", help="The action to be performed", choices=["add", "remove", "view"]
-    )
-    parser.add_argument(
-        "program",
-        help="The program's dotfiles to be processed",
-        choices=DOTFILES.keys(),
-    )
-    args = parser.parse_args()
-
-    # Check if the number of arguments is correct
-    if len(args.__dict__) != 2:
-        parser.print_usage()
-        exit(EXIT_FAILURE)
-
-    # Call stowizer function with the parsed argument
-    stowizer(args.action, args.program)
+    tyro.cli(stowizer)

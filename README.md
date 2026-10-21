@@ -53,7 +53,7 @@ Here are some details about my setup:
 You can clone the repository wherever you want. (I like to keep it in `~/dotfiles` as a symlink.) The setup script will pull in the latest version and copy the files to your home folder.
 
 ```sh
-git clone https://github.com/Kaweees/dotfiles-old.git ~/dotfiles --recurse-submodules && cd ~/dotfiles && python3 stowizer.py add zsh
+git clone https://github.com/Kaweees/dotfiles-old.git ~/dotfiles --recurse-submodules && cd ~/dotfiles && ./stowizer.py add zsh
 ```
 
 ```
