@@ -7,7 +7,7 @@
 from __future__ import annotations
 
 import os, subprocess
-from typing import List, Dict, Literal
+from typing import TYPE_CHECKING, Dict, Literal
 from sys import exit
 
 import tyro
@@ -79,7 +79,10 @@ DOTFILES: Dict[str, Dict[str, str]] = {
 # DOTFILES["all"] = choices=DOTFILES.keys()
 
 Action = Literal["add", "remove", "view"]
-Program = Literal[tuple(DOTFILES)]
+if TYPE_CHECKING:
+    Program = str
+else:
+    Program = Literal[tuple(DOTFILES)]
 
 
 def stowizer(action: Positional[Action], program: Positional[Program]):
