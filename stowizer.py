@@ -18,12 +18,10 @@ EXIT_SUCCESS: int = 0
 EXIT_FAILURE: int = -1
 
 # Get locations of the home directory and the dotfiles directory
-HOME_DIR: str = os.getenv("HOME")
-DOTFILES_DIR: str = os.getenv("DOTFILES")
-if DOTFILES_DIR is None:
-    DOTFILES_DIR = os.path.dirname(os.path.realpath(__file__))
+HOME_DIR: str = os.path.expanduser("~")
+DOTFILES_DIR: str = os.getenv("DOTFILES") or os.path.dirname(os.path.realpath(__file__))
 
-DOTFILES: Dict[str, Dict[str, str] | List[str]] = {
+DOTFILES: Dict[str, Dict[str, str]] = {
     "alacritty": {
         "source": f"{DOTFILES_DIR}/.config/alacritty/",
         "target": f"{HOME_DIR}/.config/alacritty/",
