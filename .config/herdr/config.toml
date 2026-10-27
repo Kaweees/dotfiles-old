@@ -7,8 +7,8 @@ auto_switch = false
 [ui]
 agent_panel_sort = "priority"
 
-# Keybindings mirroring ~/dotfiles-old/.config/tmux/tmux.conf
-# (custom bindings plus tmux defaults where herdr has an equivalent action)
+# Keybindings mirroring ../tmux/tmux.conf.
+# All terminal-mode actions require the Ctrl+Space leader so app shortcuts pass through.
 [keys]
 # tmux: set -g prefix C-Space
 prefix = "ctrl+space"
@@ -17,11 +17,11 @@ prefix = "ctrl+space"
 reload_config = "prefix+r"
 resize_mode = "prefix+shift+r"
 
-# tmux: bind h/j/k/l select-pane, prefix+arrows, M-arrows without prefix
-focus_pane_left = ["prefix+h", "prefix+left", "alt+left"]
-focus_pane_down = ["prefix+j", "prefix+down", "alt+down"]
-focus_pane_up = ["prefix+k", "prefix+up", "alt+up"]
-focus_pane_right = ["prefix+l", "prefix+right", "alt+right"]
+# tmux: bind h/j/k/l select-pane, prefix+arrows
+focus_pane_left = ["prefix+h", "prefix+left"]
+focus_pane_down = ["prefix+j", "prefix+down"]
+focus_pane_up = ["prefix+k", "prefix+up"]
+focus_pane_right = ["prefix+l", "prefix+right"]
 
 # tmux defaults: prefix+C-arrows resize the pane
 resize_pane_left = "prefix+ctrl+left"
@@ -34,10 +34,10 @@ split_horizontal = "prefix+double_quote"
 split_vertical = "prefix+percent"
 
 # tmux windows -> herdr tabs: c, n, p, ",", &, 1..9
-# plus S-Left/S-Right and M-H/M-L without prefix
+# Shift+arrows also switch tabs after the leader.
 new_tab = "prefix+c"
-next_tab = ["prefix+n", "shift+right", "alt+shift+l"]
-previous_tab = ["prefix+p", "shift+left", "alt+shift+h"]
+next_tab = ["prefix+n", "prefix+shift+right"]
+previous_tab = ["prefix+p", "prefix+shift+left"]
 rename_tab = "prefix+comma"
 close_tab = "prefix+ampersand"
 switch_tab = "prefix+1..9"
